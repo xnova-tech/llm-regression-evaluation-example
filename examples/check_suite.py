@@ -7,6 +7,6 @@ test_namespace = runpy.run_path(str(Path(__file__).with_name("test_compare.py"))
 suite = unittest.defaultTestLoader.loadTestsFromTestCase(test_namespace["ComparisonTests"])
 result = unittest.TestResult()
 suite.run(result)
-if not result.wasSuccessful() or result.testsRun != 7:
+if not result.wasSuccessful() or result.testsRun != 8:
     raise SystemExit(f"failed: {result.failures}, errors: {result.errors}")
-print("7 tests passed")
+print("8 tests passed")

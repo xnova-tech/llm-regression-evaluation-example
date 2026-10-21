@@ -24,6 +24,8 @@ def load(name: str) -> dict[str, Any]:
 def validate_inputs(dataset: dict[str, Any], baseline: dict[str, Any],
                     candidate: dict[str, Any]) -> None:
     cases = dataset["cases"]
+    if not cases:
+        raise ValueError("Golden dataset has no cases")
     ids = [case["id"] for case in cases]
     if len(ids) != len(set(ids)):
         raise ValueError("Duplicate case ID")

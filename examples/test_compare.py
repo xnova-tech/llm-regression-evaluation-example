@@ -68,6 +68,12 @@ class ComparisonTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Configuration drift"):
             compare(self.dataset, self.baseline, candidate)
 
+    def test_empty_dataset_rejected(self):
+        dataset = copy.deepcopy(self.dataset)
+        dataset["cases"] = []
+        with self.assertRaisesRegex(ValueError, "Golden dataset has no cases"):
+            compare(dataset, self.baseline, self.candidate)
+
 
 if __name__ == "__main__":
     unittest.main()
