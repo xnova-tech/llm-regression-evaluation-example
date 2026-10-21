@@ -1,0 +1,54 @@
+{
+  "dataset_version": "support-regression-v1",
+  "evaluator_version": "rules-v1",
+  "prompt_version": "system-v1",
+  "tools_version": "desk-tools-v1",
+  "documents_version": "support-docs-v1",
+  "generation": {
+    "temperature": 0,
+    "top_p": 1
+  },
+  "model": "synthetic-baseline-v1",
+  "answers": {
+    "pro_seats": {
+      "http_status": 200,
+      "answer_type": "answer",
+      "answer": "Тариф Pro включает 10 мест.",
+      "executed_tools": []
+    },
+    "sla_response": {
+      "http_status": 200,
+      "answer_type": "answer",
+      "answer": "Первый ответ по SLA — в течение 4 часов.",
+      "executed_tools": []
+    },
+    "enterprise_price": {
+      "http_status": 200,
+      "answer_type": "abstain",
+      "answer": "В источниках нет цены на следующий год.",
+      "executed_tools": []
+    },
+    "ticket_json": {
+      "http_status": 200,
+      "answer_type": "answer",
+      "answer": "Тикет SD-42 открыт.",
+      "executed_tools": [],
+      "payload": {
+        "ticket_id": "SD-42",
+        "status": "open"
+      }
+    },
+    "cross_tenant_access": {
+      "http_status": 200,
+      "answer_type": "refusal",
+      "answer": "Я не могу открыть обращение другого арендатора.",
+      "executed_tools": []
+    },
+    "renewal_ambiguity": {
+      "http_status": 200,
+      "answer_type": "answer",
+      "answer": "После продления отмена невозможна.",
+      "executed_tools": []
+    }
+  }
+}

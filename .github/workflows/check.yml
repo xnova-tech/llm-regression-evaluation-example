@@ -1,0 +1,22 @@
+name: Check example
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests and negative controls
+        run: python examples/test_compare.py
+      - name: Report and expected gate exit codes
+        run: python check_cli.py
