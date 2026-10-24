@@ -6,13 +6,14 @@
 
 ## Запуск
 
-Установите Python 3.12 или новее. Внешних пакетов нет. После обычного клонирования выполните:
+Установите Python 3.12 или новее. Основной пример использует стандартную библиотеку; для контрольных тестов нужен `pytest==9.1.1`. После клонирования выполните:
 
 ```bash
 git clone https://github.com/xnova-tech/llm-regression-evaluation-example.git
 cd llm-regression-evaluation-example
+python -m pip install -r requirements-dev.txt
 python examples/compare.py
-python examples/test_compare.py
+python -m pytest -q examples/test_compare.py
 python examples/compare.py --ci
 ```
 

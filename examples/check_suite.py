@@ -1,12 +1,21 @@
-"""Run the unittest controls with stable stdout for the publication verifier."""
-import runpy
-import unittest
+"""Run the offline comparison controls through pytest."""
+
+import io
+import sys
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
-test_namespace = runpy.run_path(str(Path(__file__).with_name("test_compare.py")))
-suite = unittest.defaultTestLoader.loadTestsFromTestCase(test_namespace["ComparisonTests"])
-result = unittest.TestResult()
-suite.run(result)
-if not result.wasSuccessful() or result.testsRun != 8:
-    raise SystemExit(f"failed: {result.failures}, errors: {result.errors}")
-print("8 tests passed")
+import pytest
+
+
+def main() -> None:
+    output = io.StringIO()
+    with redirect_stdout(output), redirect_stderr(output):
+        result = pytest.main(["-q", str(Path(__file__).with_name("test_compare.py"))])
+    if result != pytest.ExitCode.OK or "8 passed" not in output.getvalue():
+        raise SystemExit(output.getvalue() or "comparison suite failed")
+    sys.stdout.write("8 tests passed\n")
+
+
+if __name__ == "__main__":
+    main()
